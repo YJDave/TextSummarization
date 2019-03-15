@@ -88,7 +88,7 @@ def comparer():
 	if request.method == 'POST':
 		rawtext = request.form['rawtext']
 		final_reading_time = readingTime(rawtext)
-		final_summary_spacy = text_summarizer(rawtext)
+		final_summary_spacy, charts = text_summarizer(rawtext)
 		summary_reading_time = readingTime(final_summary_spacy)
 		# Gensim Summarizer
 		final_summary_gensim = summarize(rawtext)
