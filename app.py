@@ -102,7 +102,28 @@ def comparer():
 
 		end = time.time()
 		final_time = end-start
-	return render_template('compare_summary.html',ctext=rawtext,final_summary_spacy=final_summary_spacy,final_summary_gensim=final_summary_gensim,final_summary_nltk=final_summary_nltk,final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,summary_reading_time_gensim=summary_reading_time_gensim,final_summary_sumy=final_summary_sumy,summary_reading_time_sumy=summary_reading_time_sumy,summary_reading_time_nltk=summary_reading_time_nltk)
+
+		import matplotlib
+		matplotlib.use('TkAgg')
+		from matplotlib import pyplot as plt
+		import mpld3
+
+		fig, ax = plt.subplots()
+		model_names = ("SPACY", "GENSIM", "NLTK", "SUMY LEXRANK")
+		summary_time_cmp = [summary_reading_time, summary_reading_time_gensim,
+							summary_reading_time_nltk, summary_reading_time_sumy]
+		ax.bar([0,1,2,3], summary_time_cmp, align='center', alpha=0.5)
+		plt.xticks([0,1,2,3], model_names, rotation='vertical')
+		plt.ylabel('Time in minute')
+		plt.title('Time comparision between different models')
+		chart_html1 = mpld3.fig_to_html(fig)
+
+	return render_template('compare_summary.html',ctext=rawtext,final_summary_spacy=final_summary_spacy,
+		final_summary_gensim=final_summary_gensim,final_summary_nltk=final_summary_nltk,final_time=final_time,
+		final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,
+		summary_reading_time_gensim=summary_reading_time_gensim,final_summary_sumy=final_summary_sumy,
+		summary_reading_time_sumy=summary_reading_time_sumy,summary_reading_time_nltk=summary_reading_time_nltk,
+		chart_html_array=[chart_html1])
 
 
 
