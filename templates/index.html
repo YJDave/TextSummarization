@@ -108,6 +108,10 @@
   <!-- Result Display-->
   <section class="section section-solutions-about grey darken-2">
  <div class="container white-text">
+  <h6>Charts:</h6>
+  {% for chart_html in chart_html_array %}
+    {{ chart_html|safe }}
+  {% endfor %}
 
           <div class="icon-block">
             <!-- <h2 class="center brown-text"><i class="material-icons">chrome_reader_mode</i></h2> -->
@@ -127,6 +131,7 @@
             <p class="light">{{ctext}}</p>
              
         </div>
+  }
 
   
   </div>

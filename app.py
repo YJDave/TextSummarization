@@ -53,11 +53,13 @@ def analyze():
 	if request.method == 'POST':
 		rawtext = request.form['rawtext']
 		final_reading_time = readingTime(rawtext)
-		final_summary = text_summarizer(rawtext)
+		final_summary, chart_html_array = text_summarizer(rawtext)
 		summary_reading_time = readingTime(final_summary)
 		end = time.time()
 		final_time = end-start
-	return render_template('index.html',ctext=rawtext,final_summary=final_summary,final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time)
+	return render_template('index.html',ctext=rawtext,final_summary=final_summary,
+		final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,
+		chart_html_array=chart_html_array)
 
 @app.route('/analyze_url',methods=['GET','POST'])
 def analyze_url():
@@ -66,11 +68,13 @@ def analyze_url():
 		raw_url = request.form['raw_url']
 		rawtext = get_text(raw_url)
 		final_reading_time = readingTime(rawtext)
-		final_summary = text_summarizer(rawtext)
+		final_summary, chart_html_array = text_summarizer(rawtext)
 		summary_reading_time = readingTime(final_summary)
 		end = time.time()
 		final_time = end-start
-	return render_template('index.html',ctext=rawtext,final_summary=final_summary,final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time)
+	return render_template('index.html',ctext=rawtext,final_summary=final_summary,final_time=final_time,
+		final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,
+		chart_html_array=chart_html_array)
 
 
 
