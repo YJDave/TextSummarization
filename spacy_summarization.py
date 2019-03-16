@@ -35,7 +35,7 @@ def text_summarizer(raw_docx):
     performance = list(word_frequencies.values())
 
     fig, ax = plt.subplots()
-    ax.bar(y_pos, performance, align='center', alpha=0.5)
+    ax.bar(y_pos, performance, align='center', alpha=0.5, color="r")
     plt.xticks(y_pos, objects, rotation='vertical')
     plt.ylabel('No of occurences')
     plt.title('Words Frequency')
@@ -94,7 +94,7 @@ def text_summarizer(raw_docx):
 
 
     print("sentence_scores\n", sentence_scores)
-    summarized_sentences = nlargest(7, sentence_scores, key=sentence_scores.get)
+    summarized_sentences = nlargest(5, sentence_scores, key=sentence_scores.get)
     final_sentences = [ w.text for w in summarized_sentences ]
     summary = ' '.join(final_sentences)
     return summary, [chart_html1, chart_html2]
