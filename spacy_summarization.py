@@ -61,16 +61,22 @@ def text_summarizer(raw_docx):
     # # plt.show()
     # mpld3.show()
 
-    # fig3, ax3 = plt.subplots()
-    # objects3 = objects[1:10]
-    # y_pos3 = np.arange(len(objects3))
-    # performance3 = 
-    # ax3.bar(y_pos3, performance3, align='center', alpha=0.5)
-    # plt.margins(0.2)
-    # plt.ylabel('No of occurences')
-    # plt.title('Most Frequent Words')
-    # plt.subplots_adjust(bottom=0.15)
-    # chart_html3 = mpld3.fig_to_html(fig3)
+    sorted_by_value = sorted(word_frequencies.items(), key=lambda kv: kv[1])
+    fig3, ax3 = plt.subplots()
+    sorted_by_value = sorted(word_frequencies.items(), key=lambda kv: kv[1])
+
+    objects3 = [i[0] for i in sorted_by_value[1:10]]
+    performance3 = [i[1] for i in sorted_by_value[1:10]]
+
+    print(objects3, sorted_by_value[1:10], performance3)
+    y_pos3 = np.arange(len(objects3))
+    ax3.bar(y_pos3, performance3, align='center', alpha=0.5)
+    plt.margins(0.2)
+    plt.xticks(y_pos3, objects3)
+    plt.ylabel('No of occurences')
+    plt.title('Most Frequent Words')
+    plt.subplots_adjust(bottom=0.15)
+    chart_html3 = mpld3.fig_to_html(fig3)
 
 
     maximum_frequncy = max(word_frequencies.values())
@@ -97,4 +103,4 @@ def text_summarizer(raw_docx):
     summarized_sentences = nlargest(5, sentence_scores, key=sentence_scores.get)
     final_sentences = [ w.text for w in summarized_sentences ]
     summary = ' '.join(final_sentences)
-    return summary, [chart_html1, chart_html2]
+    return summary, [chart_html1, chart_html2, chart_html3]
