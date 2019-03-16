@@ -27,7 +27,7 @@ def text_summarizer(raw_docx):
                 word_frequencies[word.text] += 1
 
 
-    print("word_frequencies\n", word_frequencies)
+    # print("word_frequencies\n", word_frequencies)
 
     # BAR CHART: Display bar charts of different words
     objects = tuple(word_frequencies.keys())
@@ -63,12 +63,13 @@ def text_summarizer(raw_docx):
 
     sorted_by_value = sorted(word_frequencies.items(), key=lambda kv: kv[1])
     fig3, ax3 = plt.subplots()
-    sorted_by_value = sorted(word_frequencies.items(), key=lambda kv: kv[1])
 
-    objects3 = [i[0] for i in sorted_by_value[1:10]]
-    performance3 = [i[1] for i in sorted_by_value[1:10]]
+    max_top_values = -10
+    top_values = sorted_by_value[max_top_values:]
+    objects3 = [i[0] for i in top_values]
+    performance3 = [i[1] for i in top_values]
 
-    print(objects3, sorted_by_value[1:10], performance3)
+    print(top_values, objects3, performance3)
     y_pos3 = np.arange(len(objects3))
     ax3.bar(y_pos3, performance3, align='center', alpha=0.5)
     plt.margins(0.2)
